@@ -16,7 +16,7 @@ var server = http.createServer(function(request, response) {
             response.end();
         });
     }
-    else { //Serving all the other files
+    else if (URL == '/jquery.js'){ //Serving all the other files
         fs.readFile(URL.substr(1), 'utf8', function(err, data){
             if(err){
                 console.log(err);
@@ -26,6 +26,21 @@ var server = http.createServer(function(request, response) {
             response.write(data);
             response.end();
         });
+    }
+    else if (URL == '/favicon.ico'){
+        fs.readFile(URL.substr(1), 'binary', function(err, data){
+            if(err){
+                console.log(err);
+                return;
+            }
+            console.log(URL + " served at " + new Date());
+            response.write(data);
+            response.end();
+        });
+    }
+    else{
+        response.write('Nothing here!');
+        response.end();
     }
 });
 
