@@ -92,7 +92,7 @@
 		<div id = "wrapper">
 			<div id = "header">
 				<h1 id = "page_title">node_chat</h1>
-				<h2 id = "page_slogan">A node.js experiment</a> | <a href = 'about.html'>About node_chat</a></h2>
+				<h2 id = "page_slogan">A node.js / WebSocket experiment</a> | <a href = 'https://github.com/rivalslayer/node_chat'>About node_chat</a></h2>
 			</div>			
 			<div id = "chat">
 				<div id = "user">
@@ -126,6 +126,7 @@
 					Socket.addEventListener('open', function(event){
 						$('#chat_input').show();
 						$('#messages').show();
+						$('#messages').append('<p class = "chat_text">You are logged in! Now introduce yourself!</p>')
 						$('#chat_input').focus();
 						$('#log_in_status').text("Logged in as " + username).show();
 					});
