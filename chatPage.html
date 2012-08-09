@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>node_chat | A node.js experiment</title>
+		<script src="jquery.js"></script>
+		<style type = "text/css">
+			#wrapper{
+				width: 800px;
+				margin-left: auto;
+				margin-right: auto;
+				color: #999;
+				background: #FFF;
+				border-radius: 5px;
+				padding: 40px;
+			}
+			#page_title{
+				margin-top: 0px;
+				margin-bottom: 0px;
+				font-family: Rockwell;
+				font-size: 45px;
+			}
+			#page_slogan{
+				font-family: Rockwell;
+				font-size: 20px;
+			}
+			#page_slogan a{
+				color: #333;
+				text-decoration: none;
+				transition: color 0.5s;
+				-o-transition: color 0.5s;
+				-webkit-transition: color 0.5s;
+				-moz-transition: color 0.5s;
+			}
+			#page_slogan a:hover{
+				color: #999;
+			}
+			#user{
+				margin-top: 50px;
+				text-align: center;
+			}
+			#user input{
+				font-family: Rockwell;
+				font-weight: bold;
+				font-size: 25px;
+				color: #BBB;
+			}
+			#chat{				
+				bottom: 10px;
+			}
+			.page_text{
+				font-size: 20px;
+				font-family: Rockwell;
+				text-align: center;
+			}
+			#chat_input{
+				display: none;
+				font-family: Rockwell;
+				font-weight: bold;
+				font-size: 20px;
+				width: 800px;
+				color: #BBB;
+			}
+			.chat_text{
+				text-align: left;
+				font-family: Rockwell;
+				font-size: 20px;
+				color: #999;
+			}
+			#messages{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id = "wrapper">
+			<h1 id = "page_title">node_chat</h1>
+			<h2 id = "page_slogan">A node.js experiment by <a href = "http://arijit.me.pn">Arijit Dasgupta</a> | <a href = 'about.html'>About node_chat</a></h2>
+			<div id = "chat">
+				<div id = "user">
+					<p class = "page_text">Welcome to node_chat, you are?</p>
+					<input/>
+				</div>
+				<div id = "messages"></div>
+				<div id = "input"><input id = "chat_input"/></div>
+			</div>
+		</div>
+		<script>
+			if(!WebSocket){
+				$('#user').add('p').addClass('page_text').text('Your browser does not support WebSocket, you cannot chat!');
+			}
+			var Socket;
+			var username;
+			
+			$('#user input').keypress(function(e){
+				var code = (e.keyCode ? e.keyCode : e.which);
+				if(code == 13){
+					var val = $("#user input").val();
+					username = val;
+					//login routine
+					$('#user').remove();
+					chat_url = window.location.href;
+					chat_url = chat_url.substr(4);
+					chat_url = 'ws' + chat_url; //Configured the chat URL
+					Socket = new WebSocket(chat_url, 'chat-protocol'); //opened chat socket
+					
+					Socket.addEventListener('open', function(event){
+						$('#chat_input').show();
+						$('#messages').show();
+					});
+					
+					Socket.addEventListener('message', function(event){
+							var object = eval('('+event.data+')');
+							var sender = object['sender'];
+							var message = object['message'];
+							var appendable = '<p class = "chat_text">' + message + ' - ' + sender + '</p>';
+							$('#messages').append(appendable);
+					});
+					
+					Socket.addEventListener('error', function(event){
+						return;
+					});
+				}					
+			});
+			
+			$('#chat_input').keypress(function(e){
+				var code = (e.keyCode ? e.keyCode : e.which);
+				if (code == 13){
+					message = $('#chat_input').val();
+					sender = username;
+					$('#chat_input').val('')
+					json_data = JSON.stringify({'message':message, 'sender':sender});
+					Socket.send(json_data);
+				}
+			});
+		</script>
+	</body>
+</html>
