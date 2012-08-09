@@ -12,6 +12,7 @@
 				background: #FFF;
 				border-radius: 5px;
 				padding: 40px;
+				padding-bottom: 0px;
 			}
 			#page_title{
 				margin-top: 0px;
@@ -44,8 +45,8 @@
 				font-size: 25px;
 				color: #BBB;
 			}
-			#chat{				
-				bottom: 10px;
+			#chat{	
+				margin-top: 200px;
 			}
 			.page_text{
 				font-size: 20px;
@@ -69,12 +70,30 @@
 			#messages{
 				display: none;
 			}
+			#header{
+				z-index: 10;
+				position: fixed;
+				top: 0px;
+				padding: 0px;
+				background: rgba(255,255,255,0.8);
+				width: 760px;
+			}
+			.mini_text{
+				text-align: left;
+				font-size: 14px;
+				font-family: Rockwell;
+			}
+			#log_in_status{
+				display: none;
+			}
 		</style>
 	</head>
 	<body>
 		<div id = "wrapper">
-			<h1 id = "page_title">node_chat</h1>
-			<h2 id = "page_slogan">A node.js experiment by <a href = "http://arijit.me.pn">Arijit Dasgupta</a> | <a href = 'about.html'>About node_chat</a></h2>
+			<div id = "header">
+				<h1 id = "page_title">node_chat</h1>
+				<h2 id = "page_slogan">A node.js experiment</a> | <a href = 'about.html'>About node_chat</a></h2>
+			</div>			
 			<div id = "chat">
 				<div id = "user">
 					<p class = "page_text">Welcome to node_chat, you are?</p>
@@ -82,6 +101,7 @@
 				</div>
 				<div id = "messages"></div>
 				<div id = "input"><input id = "chat_input"/></div>
+				<p class = "mini_text" id = "log_in_status"></p>
 			</div>
 		</div>
 		<script>
@@ -106,14 +126,17 @@
 					Socket.addEventListener('open', function(event){
 						$('#chat_input').show();
 						$('#messages').show();
+						$('#chat_input').focus();
+						$('#log_in_status').text("Logged in as " + username).show();
 					});
 					
 					Socket.addEventListener('message', function(event){
 							var object = eval('('+event.data+')');
 							var sender = object['sender'];
 							var message = object['message'];
-							var appendable = '<p class = "chat_text">' + message + ' - ' + sender + '</p>';
+							var appendable = '<p class = "chat_text">' + sender + ' -- ' + message + '</p>';
 							$('#messages').append(appendable);
+							window.scrollBy(0,200);
 					});
 					
 					Socket.addEventListener('error', function(event){

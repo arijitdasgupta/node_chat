@@ -67,10 +67,13 @@ wsServer.on('request', function(request) {
             }
             users[client_index] = sender;
             json_data = JSON.stringify({'message': message, 'sender': sender});
-            for (var i = 0; i < clients.length; i++){
-                clients[i].sendUTF(json_data);
+            var test_str = message.replace(/^\s+|\s+$/g,'');
+            if(test_str != ''){
+                for (var i = 0; i < clients.length; i++){
+                    clients[i].sendUTF(json_data);
+                }
+                console.log('Broadcasted ' + message + ' from ' + sender); //Broadcasted
             }
-            console.log('Broadcasted ' + message + ' from ' + sender); //Broadcasted
         }
         else if (message.type === 'binary') { //Pointless in this server
             console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
