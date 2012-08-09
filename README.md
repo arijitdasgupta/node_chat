@@ -21,7 +21,7 @@ node chatServer.js
 ```
 
 Then you can enjoy chatting. Simply give the URL as  to your friends and they can join in. The URL should be in this format,
-`http://your_ip_address:8080`
+`http://your_ip_address:8080`. In your browser you can put `http://localhost:8080` to connect to the chat.
 
 How to change the default port
 ------------------------------
