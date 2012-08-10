@@ -29,3 +29,8 @@ By default if you will run on port 8080. You can change is by simply chaging num
 ```javascript
 server.listen(8080, function() {
 ```
+
+Thanks to
+---------
+http://martinsikora.com/nodejs-and-websocket-simple-chat-tutorial
+The server code is based on this tutorial...
