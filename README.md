@@ -4,15 +4,10 @@ A self contained chat server running on node, based on WebSocket. This server cu
 
 How to run
 ----------
-In order to run this server, you will need node.js installed in your system. After installing node.js (make sure you have npm installed) you have to install two of the node modules. websocket and fs.
-```bash
-npm install websocket
-npm install fs
-```
+In order to run this server, you will need node.js installed in your system. After installing node.js (make sure you have npm installed) you have run,
 
-If the first command doesn't work you can use,
 ```bash
-npm install websocket@1.0.3
+npm install
 ```
 
 Then you can simply write in command line while insde the chatServer directory.
@@ -20,7 +15,7 @@ Then you can simply write in command line while insde the chatServer directory.
 node chatServer.js
 ```
 
-Then you can enjoy chatting. Simply give the URL as  to your friends and they can join in. The URL should be in this format,
+Start chatting! Simply give the URL as  to your friends and they can join in. The URL should be in this format,
 `http://your_ip_address:8080`. In your browser you can put `http://localhost:8080` to connect to the chat.
 
 How to change the default port
