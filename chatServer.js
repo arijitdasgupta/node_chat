@@ -3,6 +3,8 @@ var http = require('http');
 var fs = require('fs');
 var websocket = require('websocket');
 
+const PORT = 7777;
+
 clients = [];
 users = [];
 
@@ -44,8 +46,8 @@ var server = http.createServer(function(request, response) {
     }
 });
 
-server.listen(8080, function() {
-    console.log((new Date()) + ' Server is listening on port 8080');
+server.listen(PORT, function() {
+    console.log((new Date()) + ` Server is listening on port ${PORT}`);
 });
 
 var WebSocketServer = websocket.server;
@@ -103,4 +105,3 @@ wsServer.on('request', function(request) {
         console.log('Broadcasted from admin, ' + leaving_user + ' left chat');
     });
 });
-

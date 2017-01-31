@@ -15,14 +15,19 @@ Then you can simply write in command line while insde the chatServer directory.
 node chatServer.js
 ```
 
+To make a docker image named `node_chat`
+```bash
+./make.sh
+```
+
 Start chatting! Simply give the URL as  to your friends and they can join in. The URL should be in this format,
-`http://your_ip_address:8080`. In your browser you can put `http://localhost:8080` to connect to the chat.
+`http://your_ip_address:7777`. In your browser you can put `http://localhost:7777` to connect to the chat.
 
 How to change the default port
 ------------------------------
-By default if you will run on port 8080. You can change is by simply chaging number in chatServer.js (line 47). The line looks like this,
+By default if you will run on port 7777. You can change is by simply chaging number in chatServer.js (line 47). The line looks like this,
 ```javascript
-server.listen(8080, function() {
+server.listen(7777, function() {
 ```
 
 Thanks to
