@@ -4,6 +4,7 @@ var fs = require('fs');
 var websocket = require('websocket');
 
 const PORT = 7777;
+const BASE_URI = process.env.BASE_URI || '';
 
 clients = [];
 users = [];
@@ -11,15 +12,15 @@ users = [];
 var server = http.createServer(function(request, response) {
     var URL = request.url;
     console.log((new Date()) + ' Received request for ' + URL);
-    if (URL == '/'){ //Serving the homepage
+    if (URL === BASE_URI + '/'){ //Serving the homepage
         fs.readFile('chatPage.html', 'utf8', function(err, data){
             console.log("Homepage served at" + new Date());
             response.write(data);
             response.end();
         });
     }
-    else if (URL == '/jquery.js'){ //Serving all the other files
-        fs.readFile(URL.substr(1), 'utf8', function(err, data){
+    else if (URL === BASE_URI + '/jquery.js'){ //Serving all the other files
+        fs.readFile('jquery.js', 'utf8', function(err, data){
             if(err){
                 console.log(err);
                 return;
@@ -29,8 +30,8 @@ var server = http.createServer(function(request, response) {
             response.end();
         });
     }
-    else if (URL == '/favicon.ico'){
-        fs.readFile(URL.substr(1), 'binary', function(err, data){
+    else if (URL === BASE_URI + '/favicon.ico'){
+        fs.readFile('favicon.ico', 'binary', function(err, data){
             if(err){
                 console.log(err);
                 return;

@@ -5,12 +5,11 @@ A self contained chat server running on node, based on WebSocket. This server cu
 How to run
 ----------
 In order to run this server, you will need node.js installed in your system. After installing node.js (make sure you have npm installed) you have run,
-
 ```bash
 npm install
 ```
 
-Then you can simply write in command line while insde the chatServer directory.
+Then you can simply write in command line while inside the `node_chat` directory.
 ```bash
 node chatServer.js
 ```
@@ -19,6 +18,13 @@ To make a docker image named `node_chat`
 ```bash
 ./make.sh
 ```
+
+Then,
+```bash
+docker run -p 7777:7777 -d node_chat
+```
+
+There is a pre-slashed BASE_URI environment variable option.
 
 Start chatting! Simply give the URL as  to your friends and they can join in. The URL should be in this format,
 `http://your_ip_address:7777`. In your browser you can put `http://localhost:7777` to connect to the chat.
