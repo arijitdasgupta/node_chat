@@ -1,4 +1,8 @@
 sudo: required
+language: javascript
 
 services:
   - docker
+
+script:
+  - docker build -t node_chat .
