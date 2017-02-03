@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/arijitdasgupta/node_chat.svg?branch=master)](https://travis-ci.org/arijitdasgupta/node_chat)
+
 node_chat
 =========
 A self contained chat server running on node, based on WebSocket. This server currently has many bugs and security holes. It's currently aimed as an experiment on WebSockets and node.js capability to handle socket connections. The code is also currently poorly commented.
